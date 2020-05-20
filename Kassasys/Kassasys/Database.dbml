@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbkassa" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-4378TN4;Initial Catalog=dbkassa;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="Kassasys.Properties.Settings" SettingsPropertyName="dbkassaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.klanten" Member="klantens">
+    <Type Name="klanten">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="voornaam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="achternaam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="woonplaats" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="telefoonnummer" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="klanten_bestellingen" Member="bestellingens" ThisKey="id" OtherKey="klant_id" Type="bestellingen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.producten" Member="productens">
+    <Type Name="producten">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="naam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ps_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="producten_prijshistory" Member="prijshistories" ThisKey="id" OtherKey="product_id" Type="prijshistory" />
+      <Association Name="producten_bestelitem" Member="bestelitems" ThisKey="id" OtherKey="product_id" Type="bestelitem" />
+      <Association Name="product_soorten_producten" Member="product_soorten" ThisKey="ps_id" OtherKey="id" Type="product_soorten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.product_soorten" Member="product_soortens">
+    <Type Name="product_soorten">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="soort" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="product_soorten_producten" Member="productens" ThisKey="id" OtherKey="ps_id" Type="producten" />
+    </Type>
+  </Table>
+  <Table Name="dbo.prijshistories" Member="prijshistories">
+    <Type Name="prijshistory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="start_datum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="eind_datum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="prijs" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="producten_prijshistory" Member="producten" ThisKey="product_id" OtherKey="id" Type="producten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bestellingen" Member="bestellingens">
+    <Type Name="bestellingen">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="datum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="klant_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="bestellingen_bestelitem" Member="bestelitems" ThisKey="id" OtherKey="bestelling_id" Type="bestelitem" />
+      <Association Name="klanten_bestellingen" Member="klanten" ThisKey="klant_id" OtherKey="id" Type="klanten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bestelitems" Member="bestelitems">
+    <Type Name="bestelitem">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="aantal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bestelling_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="bestellingen_bestelitem" Member="bestellingen" ThisKey="bestelling_id" OtherKey="id" Type="bestellingen" IsForeignKey="true" />
+      <Association Name="producten_bestelitem" Member="producten" ThisKey="product_id" OtherKey="id" Type="producten" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

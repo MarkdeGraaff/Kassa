@@ -1,0 +1,49 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kassasys"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Kassasys.Onderhoud"
+        mc:Ignorable="d"
+        Title="Onderhoud" Height="580.248" Width="1079" >
+    <Grid Margin="0,0,0.333,-132.333">
+        <TabControl HorizontalAlignment="Left" Height="518" Margin="10,25,0,0" VerticalAlignment="Top" Width="1003">
+            <TabItem Header="Product" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="281" FontSize="48" Margin="222,0,-222,0">
+                <Grid Background="#FFE5E5E5" Margin="0,0,-16,0">
+                    <DataGrid x:Name="grid_producten" HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="774" FontSize="36" AutoGenerateColumns="False">
+                        <DataGrid.Resources>
+                            <CollectionViewSource x:Key="productsoorten"
+                          Source="{Binding product_soorten }"/>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                            <DataGridComboBoxColumn Header="product_soort"   ItemsSource="{Binding Source={StaticResource productsoorten }}" 
+                                                                    SelectedValueBinding="{Binding ps_id}"
+                                                                    SelectedValuePath="id" 
+                                                                    DisplayMemberPath="soort" />
+                            <DataGridTextColumn Header="productnaam" Binding="{Binding naam}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnOpslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="814,14,0,0" VerticalAlignment="Top" Width="170" FontSize="24" FontWeight="Bold" Height="60" Click="BtnOpslaan_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Klant" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="208" Margin="-271,0,0,0" FontSize="48">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="grid_klanten" HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="776" FontSize="36" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                        <DataGridTextColumn Header="Voornaam" Binding="{Binding voornaam}" />
+                        <DataGridTextColumn Header="Achternaam" Binding="{Binding achternaam}" />
+                        <DataGridTextColumn Header="Plaats" Binding="{Binding woonplaats}" />
+                        <DataGridTextColumn Header="Telefoon" Binding="{Binding telefoonnummer}" />
+                            <DataGridTextColumn Header="EMail" Binding="{Binding email}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnOpslaan_Klant" Content="Opslaan" HorizontalAlignment="Left" Height="75" Margin="791,10,0,0" VerticalAlignment="Top" Width="196" FontSize="24" FontWeight="Bold" Click="BtnOpslaan_Klant_Click"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -5,37 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kassasys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Initialized="Win_Main_Initialized">
-    <Grid>
+        Title="MainWindow" Height="541.434" Width="865.711" Initialized="Win_Main_Initialized">
+    <Grid Margin="0,10,3.333,5.667">
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="683*"/>
+            <ColumnDefinition Width="1077*"/>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="353*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="menuknoppen" Margin="0,76,0.333,0" HorizontalAlignment="Right" Width="100" Height="335" VerticalAlignment="Top" Grid.Column="2">
-            <Button x:Name="but_Fris" Content="Fris" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Fris_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="c:\temp\download.jpg"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="but_Salade" Content="Button" Height="85" Margin="0,0,0.333,0" Click="But_Salade_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="c:\temp\salade.jpg"/>
-                </Button.Background>
-            </Button>
-            <Button Content="Button" Height="85" Margin="0,0,0.333,0"/>
-            <Button Content="Button" Height="85" Margin="0,0,0.333,0"/>
-        </StackPanel>
-        <Canvas x:Name="Canvas_Fris" HorizontalAlignment="Center" Height="335" Margin="206,76,130.333,0" VerticalAlignment="Top" Width="347" Grid.Column="2">
-            <Button Content="Fanta" Height="64" Width="111" FontWeight="Bold"/>
-            <Button Content="Cola" Height="64" Width="111" Canvas.Left="116" FontWeight="Bold"/>
-            <Button Content="7Up" Height="64" Width="111" Canvas.Left="232" FontWeight="Bold"/>
-            <Button Content="Tonic" Height="64" Width="111" Canvas.Top="69" FontWeight="Bold"/>
-            <Button Content="Fernandes" Height="64" Width="111" Canvas.Left="116" Canvas.Top="69" FontWeight="Bold"/>
+        <Canvas x:Name="canvas_midden" Margin="221,125,180,0.666" Background="#FF0D5097" VerticalAlignment="Bottom" Height="400" Grid.ColumnSpan="3">
+            <Canvas x:Name="Canvas_Fris" HorizontalAlignment="Center" Height="310" VerticalAlignment="Top" Width="377" Background="#FFD2C8C8" Canvas.Top="58" Canvas.Left="46">
+                <Canvas.Effect>
+                    <DropShadowEffect/>
+                </Canvas.Effect>
+                <Button Content="Fanta" Height="64" Width="111" FontWeight="Bold"/>
+                <Button Content="Cola" Height="64" Width="111" Canvas.Left="116" FontWeight="Bold"/>
+                <Button Content="7Up" Height="64" Width="111" Canvas.Left="232" FontWeight="Bold"/>
+                <Button Content="Tonic" Height="64" Width="111" Canvas.Top="69" FontWeight="Bold"/>
+                <Button Content="Fernandes" Height="64" Width="111" Canvas.Left="116" Canvas.Top="69" FontWeight="Bold"/>
+            </Canvas>
+            <Canvas x:Name="Canvas_Salade" Height="308" Width="377" Background="#FFAFA5A5" Canvas.Top="60" Canvas.Left="46">
+                <Canvas.Effect>
+                    <DropShadowEffect/>
+                </Canvas.Effect>
+                <Button Content="Ceasar" Height="64" Width="111" FontWeight="Bold" Click="Button_Click"/>
+                <Button Content="Niecoise" Height="64" Width="111" Canvas.Left="116" FontWeight="Bold" ClipToBounds="True"/>
+            </Canvas>
+            <Canvas Height="53" Width="526"/>
+            <Canvas x:Name="canvas_Snacks" Height="308" Canvas.Left="46" Canvas.Top="60" Width="377" Background="#FFD4CDCD">
+                <Button Content="Frikandel" Width="94" Height="66"/>
+                <Button Content="Kaassoufflé" Width="94" Height="66" Canvas.Left="99" IsCancel="True"/>
+                <Button Content="kroket" Width="94" Height="66" Canvas.Left="198"/>
+                <Button Content="berenklauw" Width="94" Height="66" Canvas.Top="71"/>
+
+            </Canvas>
+            <Canvas x:Name="canvas_bieren" Height="308" Canvas.Left="46" Canvas.Top="60" Width="377" Background="#FFD8D0D0">
+                <Button Content="Heineken" Width="88" Height="58"/>
+                <Button Content="Hertog-Jan" Width="88" Height="58" Canvas.Left="93"/>
+                <Button Content="Amstel" Width="88" Height="58" Canvas.Left="186"/>
+            </Canvas>
         </Canvas>
-        <Canvas x:Name="Canvas_Salade" HorizontalAlignment="Left" Height="335" Margin="206,76,0,0" VerticalAlignment="Top" Width="347" Grid.Column="2">
-            <Button Content="Ceasar" Height="64" Width="111" FontWeight="Bold" Click="Button_Click"/>
-            <Button Content="Niecoise" Height="64" Width="111" Canvas.Left="116" FontWeight="Bold" ClipToBounds="True"/>
+        <Canvas x:Name="canvas_links" Width="216" HorizontalAlignment="Left" Background="#FF1ECB18" Panel.ZIndex="1" Height="400" VerticalAlignment="Bottom" Margin="0">
+            <DataGrid HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="196" Canvas.Left="10" Canvas.Top="11"/>
+        </Canvas>
+        <Canvas x:Name="canvas_rechts" Margin="0,4,1,0" RenderTransformOrigin="-0.253,0.51" Background="#FFAB2323" Grid.Column="2" HorizontalAlignment="Right" Width="179" VerticalAlignment="Bottom" Height="400">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.153"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.596"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <StackPanel x:Name="menuknoppen" Width="137" Canvas.Left="10" Canvas.Top="58" RenderTransformOrigin="-5.81,0.468" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="336">
+                <Button x:Name="but_Fris" Content="Fris" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Fris_Click" Foreground="Black">
+                    <Button.Background>
+                        <ImageBrush ImageSource="download.jpg"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="but_Salade" Content="Salade" Height="85" Margin="0,0,0.333,0" Click="But_Salade_Click" FontSize="22" FontWeight="Bold">
+                    <Button.Background>
+                        <ImageBrush ImageSource="c:\temp\salade.jpg"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="but_Snacks" Content="Snacks" Height="85" Margin="0,0,0.333,0" Click="But_Snacks_Click" FontWeight="Bold" FontSize="22">
+                    <Button.Background>
+                        <ImageBrush ImageSource="c:\temp\download.jfif"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="but_Bieren" Content="Bieren" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Bieren_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="c:\temp\aaa.jfif"/>
+                    </Button.Background>
+                </Button>
+                <Canvas Height="100"/>
+            </StackPanel>
+            <Button x:Name="but_Weg" Content="Alles Weg" Canvas.Left="10" Canvas.Top="10" Width="137" Height="43" Click="But_Weg_Click"/>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="95" Margin="0,-4,0,0" VerticalAlignment="Top" Width="216" Background="#FFC0B00D">
+            <Button Content="+" Canvas.Left="28" Canvas.Top="10" Width="75" Height="75" FontWeight="Bold" FontSize="48"/>
+            <Button Content="-" Canvas.Left="131" Canvas.Top="10" Width="75" Height="75" FontSize="48" FontWeight="Bold" RenderTransformOrigin="-0.802,0.358"/>
+        </Canvas>
+        <Canvas Grid.Column="2" HorizontalAlignment="Left" Height="81" Margin="29.667,10,0,0" VerticalAlignment="Top" Width="169">
+            <Button x:Name="butOnderhoud" Content="Onderhoud" Canvas.Left="10" Canvas.Top="10" Width="149" Height="61" FontWeight="Bold" Click="ButOnderhoud_Click"/>
         </Canvas>
 
     </Grid>
