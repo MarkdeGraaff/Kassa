@@ -61,22 +61,22 @@
             <StackPanel x:Name="menuknoppen" Width="137" Canvas.Left="10" Canvas.Top="58" RenderTransformOrigin="-5.81,0.468" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="336">
                 <Button x:Name="but_Fris" Content="Fris" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Fris_Click" Foreground="Black">
                     <Button.Background>
-                        <ImageBrush ImageSource="download.jpg"/>
+                        <ImageBrush ImageSource="https://www.leduclunchenzo.nl/wp-content/uploads/2016/07/Frisdrank1.jpg"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="but_Salade" Content="Salade" Height="85" Margin="0,0,0.333,0" Click="But_Salade_Click" FontSize="22" FontWeight="Bold">
                     <Button.Background>
-                        <ImageBrush ImageSource="c:\temp\salade.jpg"/>
+                        <ImageBrush ImageSource="https://static.ah.nl/static/recepten/img_RAM_PRD122202_1024x748_JPG.jpg"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="but_Snacks" Content="Snacks" Height="85" Margin="0,0,0.333,0" Click="But_Snacks_Click" FontWeight="Bold" FontSize="22">
                     <Button.Background>
-                        <ImageBrush ImageSource="c:\temp\download.jfif"/>
+                        <ImageBrush ImageSource="https://www.vangeloven.com/sites/vangeloven/files/2020-03/44990_laan_10093.jpg"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="but_Bieren" Content="Bieren" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Bieren_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="c:\temp\aaa.jfif"/>
+                        <ImageBrush ImageSource="https://s.s-bol.com/imgbase0/imagebase3/large/FC/0/1/5/6/9200000097646510.jpg"/>
                     </Button.Background>
                 </Button>
                 <Canvas Height="100"/>
