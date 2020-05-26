@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Kassasys"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Kassasys.Onderhoud"
         mc:Ignorable="d"
-        Title="Onderhoud" Height="580.248" Width="1079" >
+        Title="Onderhoud" Height="580.248" Width="1079" Language="nl-NL">
     <Grid Margin="0,0,0.333,-132.333">
         <TabControl HorizontalAlignment="Left" Height="518" Margin="10,25,0,0" VerticalAlignment="Top" Width="1003">
             <TabItem Header="Product" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="281" FontSize="48" Margin="222,0,-222,0">
@@ -25,18 +26,18 @@
                             <DataGridTextColumn Header="productnaam" Binding="{Binding naam}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btnOpslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="814,14,0,0" VerticalAlignment="Top" Width="170" FontSize="24" FontWeight="Bold" Height="60" Click="BtnOpslaan_Click"/>
+                    <Button x:Name="btnOpslaan_Product" Content="Opslaan" HorizontalAlignment="Left" Margin="814,14,0,0" VerticalAlignment="Top" Width="170" FontSize="24" FontWeight="Bold" Height="60" Click="BtnOpslaan_Product_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Klant" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="208" Margin="-271,0,0,0" FontSize="48">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="grid_klanten" HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="776" FontSize="36" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id}" />
-                        <DataGridTextColumn Header="Voornaam" Binding="{Binding voornaam}" />
-                        <DataGridTextColumn Header="Achternaam" Binding="{Binding achternaam}" />
-                        <DataGridTextColumn Header="Plaats" Binding="{Binding woonplaats}" />
-                        <DataGridTextColumn Header="Telefoon" Binding="{Binding telefoonnummer}" />
+                            <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                            <DataGridTextColumn Header="Voornaam" Binding="{Binding voornaam}" />
+                            <DataGridTextColumn Header="Achternaam" Binding="{Binding achternaam}" />
+                            <DataGridTextColumn Header="Plaats" Binding="{Binding woonplaats}" />
+                            <DataGridTextColumn Header="Telefoon" Binding="{Binding telefoonnummer}" />
                             <DataGridTextColumn Header="EMail" Binding="{Binding email}" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -44,6 +45,56 @@
 
                 </Grid>
             </TabItem>
+            <TabItem FontSize="48" Header="Prijzen" Margin="-50,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Margin="10,0,2,4">
+                    <DataGrid x:Name="grid_prijzen" HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="774" FontSize="36" AutoGenerateColumns="False">
+                        <DataGrid.Resources>
+                            <CollectionViewSource x:Key="productprijzen"
+                          Source="{Binding prijshistory }"/>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                            <DataGridTemplateColumn Header="startdatum">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding start_datum, StringFormat=\{0:dd-MM-yyyy\}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+
+                            <DataGridTemplateColumn Header="einddatum">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding eind_datum, StringFormat=\{0:dd-MM-yyyy\}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="prijs" Binding="{Binding prijs, StringFormat=c}" />
+                            <DataGridComboBoxColumn Header="product"   ItemsSource="{Binding Source={StaticResource productprijzen }}" 
+                                                                    SelectedValueBinding="{Binding product_id}"
+                                                                    SelectedValuePath="id" 
+                                                                    DisplayMemberPath="naam" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnOpslaan_Prijzen" Content="Opslaan" HorizontalAlignment="Left" Margin="814,14,0,0" VerticalAlignment="Top" Width="170" FontSize="24" FontWeight="Bold" Height="60" Click="BtnOpslaan_Prijzen_Click"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem FontSize="42" Header="test" Margin="10,0,0,0"/>
+
         </TabControl>
+        <DatePicker HorizontalAlignment="Left" Height="40" Margin="371,548,0,0" VerticalAlignment="Top" Width="7"/>
     </Grid>
 </Window>

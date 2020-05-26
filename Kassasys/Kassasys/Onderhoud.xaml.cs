@@ -26,18 +26,27 @@ namespace Kassasys
             InitializeComponent();
             grid_producten.ItemsSource= db.productens;
             grid_klanten.ItemsSource = db.klantens;
- 
+            grid_prijzen.ItemsSource = db.prijshistories;
             var ProductSoortSource = (CollectionViewSource)grid_producten.FindResource("productsoorten");
             ProductSoortSource.Source = db.product_soortens;
+            var PrijsProductSource = (CollectionViewSource)grid_prijzen.FindResource("productprijzen");
+            PrijsProductSource.Source = db.productens;
+
         }
 
 
-        private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
+
+        private void BtnOpslaan_Klant_Click(object sender, RoutedEventArgs e)
         {
             db.SubmitChanges();
         }
 
-        private void BtnOpslaan_Klant_Click(object sender, RoutedEventArgs e)
+        private void BtnOpslaan_Product_Click(object sender, RoutedEventArgs e)
+        {
+            db.SubmitChanges();
+        }
+
+        private void BtnOpslaan_Prijzen_Click(object sender, RoutedEventArgs e)
         {
             db.SubmitChanges();
         }
