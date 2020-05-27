@@ -18,7 +18,7 @@
                           Source="{Binding product_soorten }"/>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                            <!--DataGridTextColumn Header="ID" Binding="{Binding id}" /-->
                             <DataGridComboBoxColumn Header="product_soort"   ItemsSource="{Binding Source={StaticResource productsoorten }}" 
                                                                     SelectedValueBinding="{Binding ps_id}"
                                                                     SelectedValuePath="id" 
@@ -33,7 +33,7 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="grid_klanten" HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="776" FontSize="36" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                            <!--DataGridTextColumn Header="ID" Binding="{Binding id}" /-->
                             <DataGridTextColumn Header="Voornaam" Binding="{Binding voornaam}" />
                             <DataGridTextColumn Header="Achternaam" Binding="{Binding achternaam}" />
                             <DataGridTextColumn Header="Plaats" Binding="{Binding woonplaats}" />
@@ -53,7 +53,7 @@
                           Source="{Binding prijshistory }"/>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                            <!--DataGridTextColumn Header="ID" Binding="{Binding id}" /-->
                             <DataGridTemplateColumn Header="startdatum">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

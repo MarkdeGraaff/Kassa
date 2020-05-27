@@ -2,7 +2,7 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=dbkassa;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="Kassasys.Properties.Settings" SettingsPropertyName="dbkassaConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.klanten" Member="klantens">
     <Type Name="klanten">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="voornaam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="achternaam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="woonplaats" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -13,7 +13,7 @@
   </Table>
   <Table Name="dbo.producten" Member="productens">
     <Type Name="producten">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="naam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ps_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="producten_prijshistory" Member="prijshistories" ThisKey="id" OtherKey="product_id" Type="prijshistory" />
@@ -30,7 +30,7 @@
   </Table>
   <Table Name="dbo.prijshistories" Member="prijshistories">
     <Type Name="prijshistory">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="start_datum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="eind_datum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="prijs" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
@@ -49,7 +49,7 @@
   </Table>
   <Table Name="dbo.bestelitems" Member="bestelitems">
     <Type Name="bestelitem">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="aantal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="bestelling_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
