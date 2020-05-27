@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,44 +26,52 @@ namespace Kassasys
         public MainWindow()
         {            
             InitializeComponent();
+            Initialize_Producten_Canvas(1);
             var lijst = (from klanten in db.klantens select klanten).ToList();
+        }
+
+        private void Initialize_Producten_Canvas (int productsoort)
+        {
+            Grid_Producten.Children.Clear();
+            var lijst = (from producten in db.productens where (producten.ps_id == productsoort) select producten ).ToList();
+
+            for (int i = 0; i < lijst.Count; i++)
+            {
+                Button NewButton = new Button();
+                NewButton.Content = lijst[i].naam;
+                NewButton.Uid = lijst[i].id.ToString();
+                NewButton.Height = 64;
+                NewButton.Width = 110;
+                NewButton.Click += Btn_Artikel_Click;
+                Grid_Producten.Children.Add(NewButton);
+                NewButton.SetValue(Grid.ColumnProperty, i % 3);
+                NewButton.SetValue(Grid.RowProperty, i / 3);
+
+            }
+            //Canvas_Salade.
         }
 
         private void Panels_Onzichtbaar()
         {
-            Canvas_Fris.Visibility = Visibility.Hidden;
-            Canvas_Salade.Visibility = Visibility.Hidden;
-            canvas_Snacks.Visibility = Visibility.Hidden;
-            canvas_bieren.Visibility = Visibility.Hidden;
+            Grid_Producten.Children.Clear();
         }
 
 
         private void But_Salade_Click(object sender, RoutedEventArgs e)
         {
-            Panels_Onzichtbaar();
-            Canvas_Salade.Visibility = Visibility.Visible;
+            Grid_Producten.Children.Clear();
+            Initialize_Producten_Canvas(1);
         }
 
         private void But_Fris_Click(object sender, RoutedEventArgs e)
         {
-            Panels_Onzichtbaar();
-            Canvas_Fris.Visibility = Visibility.Visible;
-           
+            Grid_Producten.Children.Clear();
+            Initialize_Producten_Canvas(2);
         }
 
         private void Win_Main_Initialized(object sender, EventArgs e)
         {
             Panels_Onzichtbaar();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //temp
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void ButOnderhoud_Click(object sender, RoutedEventArgs e)
@@ -70,26 +80,28 @@ namespace Kassasys
             frmOnderhoud.Show();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void But_Snacks_Click(object sender, RoutedEventArgs e)
         {
-            Panels_Onzichtbaar();
-            canvas_Snacks.Visibility = Visibility.Visible;
+            Grid_Producten.Children.Clear();
+            Initialize_Producten_Canvas(3);
         }
 
         private void But_Bieren_Click(object sender, RoutedEventArgs e)
         {
-            Panels_Onzichtbaar();
-            canvas_bieren.Visibility = Visibility.Visible;
+            Grid_Producten.Children.Clear();
+            Initialize_Producten_Canvas(4);
         }
 
-        private void But_Weg_Click(object sender, RoutedEventArgs e)
+        private void Btn_Artikel_Click(object sender, RoutedEventArgs e)
         {
-            Panels_Onzichtbaar();
+            
+            MessageBox.Show((sender as Button).Uid);         
+        }
+
+        private void btnBestellen_Click(object sender, RoutedEventArgs e)
+        {
+            Nieuwe_bestelling frmNieuweBestelling = new Nieuwe_bestelling();
+            frmNieuweBestelling.Show();
         }
     }
 }

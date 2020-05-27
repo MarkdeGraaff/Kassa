@@ -1,0 +1,24 @@
+﻿<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kassasys"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Kassasys.Nieuwe_bestelling"
+        mc:Ignorable="d"
+        Title="Nieuwe Bestelling" Height="474" Width="1118">
+    <Grid Margin="0,0,0,0">
+
+        <DataGrid x:Name="grid_klanten" HorizontalAlignment="Left" Height="298" Margin="30,31,0,0" VerticalAlignment="Top" Width="1032" FontSize="36" AutoGenerateColumns="False" Grid.ColumnSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding id}" />
+                <DataGridTextColumn Header="Voornaam" Binding="{Binding voornaam}" />
+                <DataGridTextColumn Header="Achternaam" Binding="{Binding achternaam}" />
+                <DataGridTextColumn Header="Plaats" Binding="{Binding woonplaats}" />
+                <DataGridTextColumn Header="Telefoon" Binding="{Binding telefoonnummer}" />
+                <DataGridTextColumn Header="EMail" Binding="{Binding email}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Nieuwe bestelling" HorizontalAlignment="Left" Margin="30,358,0,0" VerticalAlignment="Top" Width="226" Height="75" FontSize="24" Click="Button_Click"/>
+    </Grid>
+</Window>

@@ -23,7 +23,7 @@
   </Table>
   <Table Name="dbo.product_soorten" Member="product_soortens">
     <Type Name="product_soorten">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="soort" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="product_soorten_producten" Member="productens" ThisKey="id" OtherKey="ps_id" Type="producten" />
     </Type>
@@ -40,7 +40,7 @@
   </Table>
   <Table Name="dbo.bestellingen" Member="bestellingens">
     <Type Name="bestellingen">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="datum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="klant_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="bestellingen_bestelitem" Member="bestelitems" ThisKey="id" OtherKey="bestelling_id" Type="bestelitem" />
