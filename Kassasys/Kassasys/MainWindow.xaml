@@ -5,21 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kassasys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="541.434" Width="865.711" Initialized="Win_Main_Initialized">
+        Title="MainWindow" Height="541.434" Width="865.711">
     <Grid Margin="0,10,3.333,5.667">
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1077*"/>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="353*"/>
+            <ColumnDefinition Width="635*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="209*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="canvas_links" Width="292" HorizontalAlignment="Left" Background="#FF1ECB18" Panel.ZIndex="1" Height="400" VerticalAlignment="Bottom" Margin="0,0,0,-1.667">
-            <DataGrid Height="317" Canvas.Left="10" Width="272" Canvas.Top="10">
+            <DataGrid x:Name="grid_bestelitems" Height="317" Canvas.Left="10" Width="272" Canvas.Top="10" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False">
+                <DataGrid.Resources>
+                    <CollectionViewSource x:Key="prijshistories"
+                          Source="{Binding prijshistories}"/>
+                    <CollectionViewSource x:Key="producten"
+                          Source="{Binding producten}"/>
+                </DataGrid.Resources>
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Artikel"/>
-                    <DataGridTextColumn Header="Prijs"/>
-                    <DataGridTextColumn Header="Aantal"/>
+                    <DataGridComboBoxColumn Header="Artikel"   ItemsSource="{Binding Source={StaticResource producten}}" 
+                                                                    SelectedValueBinding="{Binding product_id}"
+                                                                    SelectedValuePath="id" 
+                                                                    DisplayMemberPath="naam" />
+                    <DataGridComboBoxColumn Header="Prijs"   ItemsSource="{Binding Source={StaticResource prijshistories}}" 
+                                                                    SelectedValueBinding="{Binding product_id}"
+                                                                    SelectedValuePath="id" 
+                                                                    DisplayMemberPath="prijs" />
+                    
+                    <DataGridTextColumn Header="Aantal" Binding="{Binding aantal}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid x:Name="Grid_Producten" Height="398" Canvas.Left="292" Width="384" Background="#FFB63838">

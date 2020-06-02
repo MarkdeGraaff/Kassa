@@ -22,7 +22,24 @@ namespace Kassasys
 
     public partial class Nieuwe_bestelling : Window
     {
+        bestellingen Nieuwe_Bestelling;
         DatabaseDataContext db = new DatabaseDataContext(Properties.Settings.Default.dbkassaConnectionString);
+
+
+        public int result
+        {
+            get
+            {
+                if (Nieuwe_Bestelling != null)
+                {
+                    return Nieuwe_Bestelling.id;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+        }
 
         public Nieuwe_bestelling()
         {
@@ -37,13 +54,15 @@ namespace Kassasys
 
                 klanten klantsel = (klanten)grid_klanten.SelectedItems[0];
                 int klantid = klantsel.id;
-                MessageBox.Show(klantid.ToString());
+                //MessageBox.Show(klantid.ToString());
                 
-                bestellingen Nieuwe_Bestelling = new bestellingen();
+                Nieuwe_Bestelling = new bestellingen();
                 Nieuwe_Bestelling.datum = System.DateTime.Now;
                 Nieuwe_Bestelling.klant_id = klantid;
                 db.bestellingens.InsertOnSubmit(Nieuwe_Bestelling);
                 db.SubmitChanges();
+
+                this.DialogResult = true;
                 this.Close();
             }
 

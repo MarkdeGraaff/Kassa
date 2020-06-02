@@ -23,9 +23,18 @@ namespace Kassasys
     public partial class MainWindow : Window
     {
         DatabaseDataContext db = new DatabaseDataContext();
+        bestelitem Nieuw_BestelItem;
+        int Bestelling_Id = -1;
+
         public MainWindow()
         {            
             InitializeComponent();
+            grid_bestelitems.ItemsSource = db.bestelitems;
+            var PrijzenSource = (CollectionViewSource)grid_bestelitems.FindResource("prijshistories");
+            PrijzenSource.Source = db.prijshistories;
+            var ProductenSource = (CollectionViewSource)grid_bestelitems.FindResource("producten");
+            ProductenSource.Source = db.productens;
+
             Initialize_Producten_Canvas(1);
             var lijst = (from klanten in db.klantens select klanten).ToList();
         }
@@ -39,7 +48,7 @@ namespace Kassasys
             {
                 Button NewButton = new Button();
                 NewButton.Content = lijst[i].naam;
-                NewButton.Uid = lijst[i].id.ToString();
+                NewButton.Tag = lijst[i].id.ToString();
                 NewButton.Height = 64;
                 NewButton.Width = 110;
                 NewButton.Click += Btn_Artikel_Click;
@@ -51,10 +60,7 @@ namespace Kassasys
             //Canvas_Salade.
         }
 
-        private void Panels_Onzichtbaar()
-        {
-            Grid_Producten.Children.Clear();
-        }
+        
 
 
         private void But_Salade_Click(object sender, RoutedEventArgs e)
@@ -67,11 +73,6 @@ namespace Kassasys
         {
             Grid_Producten.Children.Clear();
             Initialize_Producten_Canvas(2);
-        }
-
-        private void Win_Main_Initialized(object sender, EventArgs e)
-        {
-            Panels_Onzichtbaar();
         }
 
         private void ButOnderhoud_Click(object sender, RoutedEventArgs e)
@@ -92,16 +93,51 @@ namespace Kassasys
             Initialize_Producten_Canvas(4);
         }
 
+        private void Ververs_Grid_Bestelling()
+        {
+            grid_bestelitems.ItemsSource = null;
+            grid_bestelitems.ItemsSource = db.bestelitems;
+        }
+
         private void Btn_Artikel_Click(object sender, RoutedEventArgs e)
         {
+            int product_id;
+            product_id = int.Parse((sender as Button).Tag.ToString());
+            if (product_id >= 0 && Bestelling_Id >= 0)
+            {
+
+                Nieuw_BestelItem = new bestelitem();
+                Nieuw_BestelItem.product_id = product_id;
+                Nieuw_BestelItem.bestelling_id = Bestelling_Id;
+                Nieuw_BestelItem.aantal = 1;
+                db.bestelitems.InsertOnSubmit(Nieuw_BestelItem);
+                db.SubmitChanges();
+
+                Ververs_Grid_Bestelling();
+                //grid_bestelitems.
+                //MessageBox.Show(lijst[0].naam);
+            }
+            else
+            {
+                MessageBox.Show("Selecteer eerst een klant");
+            }
             
-            MessageBox.Show((sender as Button).Uid);         
+                    
         }
 
         private void btnBestellen_Click(object sender, RoutedEventArgs e)
         {
             Nieuwe_bestelling frmNieuweBestelling = new Nieuwe_bestelling();
-            frmNieuweBestelling.Show();
+            if (frmNieuweBestelling.ShowDialog() == true)
+            {
+                Bestelling_Id = frmNieuweBestelling.result;
+               // MessageBox.Show(frmNieuweBestelling.result.ToString());
+            }
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
