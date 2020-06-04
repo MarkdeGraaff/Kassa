@@ -33,9 +33,6 @@ namespace Kassasys
     partial void Insertklanten(klanten instance);
     partial void Updateklanten(klanten instance);
     partial void Deleteklanten(klanten instance);
-    partial void Insertproducten(producten instance);
-    partial void Updateproducten(producten instance);
-    partial void Deleteproducten(producten instance);
     partial void Insertproduct_soorten(product_soorten instance);
     partial void Updateproduct_soorten(product_soorten instance);
     partial void Deleteproduct_soorten(product_soorten instance);
@@ -48,6 +45,9 @@ namespace Kassasys
     partial void Insertbestelitem(bestelitem instance);
     partial void Updatebestelitem(bestelitem instance);
     partial void Deletebestelitem(bestelitem instance);
+    partial void Insertproducten(producten instance);
+    partial void Updateproducten(producten instance);
+    partial void Deleteproducten(producten instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -88,14 +88,6 @@ namespace Kassasys
 			}
 		}
 		
-		public System.Data.Linq.Table<producten> productens
-		{
-			get
-			{
-				return this.GetTable<producten>();
-			}
-		}
-		
 		public System.Data.Linq.Table<product_soorten> product_soortens
 		{
 			get
@@ -125,6 +117,14 @@ namespace Kassasys
 			get
 			{
 				return this.GetTable<bestelitem>();
+			}
+		}
+		
+		public System.Data.Linq.Table<producten> productens
+		{
+			get
+			{
+				return this.GetTable<producten>();
 			}
 		}
 	}
@@ -336,213 +336,6 @@ namespace Kassasys
 		{
 			this.SendPropertyChanging();
 			entity.klanten = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.producten")]
-	public partial class producten : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _naam;
-		
-		private int _ps_id;
-		
-		private EntitySet<prijshistory> _prijshistories;
-		
-		private EntitySet<bestelitem> _bestelitems;
-		
-		private EntityRef<product_soorten> _product_soorten;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnaamChanging(string value);
-    partial void OnnaamChanged();
-    partial void Onps_idChanging(int value);
-    partial void Onps_idChanged();
-    #endregion
-		
-		public producten()
-		{
-			this._prijshistories = new EntitySet<prijshistory>(new Action<prijshistory>(this.attach_prijshistories), new Action<prijshistory>(this.detach_prijshistories));
-			this._bestelitems = new EntitySet<bestelitem>(new Action<bestelitem>(this.attach_bestelitems), new Action<bestelitem>(this.detach_bestelitems));
-			this._product_soorten = default(EntityRef<product_soorten>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_naam", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string naam
-		{
-			get
-			{
-				return this._naam;
-			}
-			set
-			{
-				if ((this._naam != value))
-				{
-					this.OnnaamChanging(value);
-					this.SendPropertyChanging();
-					this._naam = value;
-					this.SendPropertyChanged("naam");
-					this.OnnaamChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ps_id", DbType="Int NOT NULL")]
-		public int ps_id
-		{
-			get
-			{
-				return this._ps_id;
-			}
-			set
-			{
-				if ((this._ps_id != value))
-				{
-					if (this._product_soorten.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onps_idChanging(value);
-					this.SendPropertyChanging();
-					this._ps_id = value;
-					this.SendPropertyChanged("ps_id");
-					this.Onps_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="producten_prijshistory", Storage="_prijshistories", ThisKey="id", OtherKey="product_id")]
-		public EntitySet<prijshistory> prijshistories
-		{
-			get
-			{
-				return this._prijshistories;
-			}
-			set
-			{
-				this._prijshistories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="producten_bestelitem", Storage="_bestelitems", ThisKey="id", OtherKey="product_id")]
-		public EntitySet<bestelitem> bestelitems
-		{
-			get
-			{
-				return this._bestelitems;
-			}
-			set
-			{
-				this._bestelitems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_soorten_producten", Storage="_product_soorten", ThisKey="ps_id", OtherKey="id", IsForeignKey=true)]
-		public product_soorten product_soorten
-		{
-			get
-			{
-				return this._product_soorten.Entity;
-			}
-			set
-			{
-				product_soorten previousValue = this._product_soorten.Entity;
-				if (((previousValue != value) 
-							|| (this._product_soorten.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product_soorten.Entity = null;
-						previousValue.productens.Remove(this);
-					}
-					this._product_soorten.Entity = value;
-					if ((value != null))
-					{
-						value.productens.Add(this);
-						this._ps_id = value.id;
-					}
-					else
-					{
-						this._ps_id = default(int);
-					}
-					this.SendPropertyChanged("product_soorten");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_prijshistories(prijshistory entity)
-		{
-			this.SendPropertyChanging();
-			entity.producten = this;
-		}
-		
-		private void detach_prijshistories(prijshistory entity)
-		{
-			this.SendPropertyChanging();
-			entity.producten = null;
-		}
-		
-		private void attach_bestelitems(bestelitem entity)
-		{
-			this.SendPropertyChanging();
-			entity.producten = this;
-		}
-		
-		private void detach_bestelitems(bestelitem entity)
-		{
-			this.SendPropertyChanging();
-			entity.producten = null;
 		}
 	}
 	
@@ -1251,6 +1044,237 @@ namespace Kassasys
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.producten")]
+	public partial class producten : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _naam;
+		
+		private int _ps_id;
+		
+		private string _barcode;
+		
+		private EntitySet<prijshistory> _prijshistories;
+		
+		private EntitySet<bestelitem> _bestelitems;
+		
+		private EntityRef<product_soorten> _product_soorten;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnaamChanging(string value);
+    partial void OnnaamChanged();
+    partial void Onps_idChanging(int value);
+    partial void Onps_idChanged();
+    partial void OnbarcodeChanging(string value);
+    partial void OnbarcodeChanged();
+    #endregion
+		
+		public producten()
+		{
+			this._prijshistories = new EntitySet<prijshistory>(new Action<prijshistory>(this.attach_prijshistories), new Action<prijshistory>(this.detach_prijshistories));
+			this._bestelitems = new EntitySet<bestelitem>(new Action<bestelitem>(this.attach_bestelitems), new Action<bestelitem>(this.detach_bestelitems));
+			this._product_soorten = default(EntityRef<product_soorten>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_naam", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string naam
+		{
+			get
+			{
+				return this._naam;
+			}
+			set
+			{
+				if ((this._naam != value))
+				{
+					this.OnnaamChanging(value);
+					this.SendPropertyChanging();
+					this._naam = value;
+					this.SendPropertyChanged("naam");
+					this.OnnaamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ps_id", DbType="Int NOT NULL")]
+		public int ps_id
+		{
+			get
+			{
+				return this._ps_id;
+			}
+			set
+			{
+				if ((this._ps_id != value))
+				{
+					if (this._product_soorten.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onps_idChanging(value);
+					this.SendPropertyChanging();
+					this._ps_id = value;
+					this.SendPropertyChanged("ps_id");
+					this.Onps_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_barcode", DbType="VarChar(128)")]
+		public string barcode
+		{
+			get
+			{
+				return this._barcode;
+			}
+			set
+			{
+				if ((this._barcode != value))
+				{
+					this.OnbarcodeChanging(value);
+					this.SendPropertyChanging();
+					this._barcode = value;
+					this.SendPropertyChanged("barcode");
+					this.OnbarcodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="producten_prijshistory", Storage="_prijshistories", ThisKey="id", OtherKey="product_id")]
+		public EntitySet<prijshistory> prijshistories
+		{
+			get
+			{
+				return this._prijshistories;
+			}
+			set
+			{
+				this._prijshistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="producten_bestelitem", Storage="_bestelitems", ThisKey="id", OtherKey="product_id")]
+		public EntitySet<bestelitem> bestelitems
+		{
+			get
+			{
+				return this._bestelitems;
+			}
+			set
+			{
+				this._bestelitems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_soorten_producten", Storage="_product_soorten", ThisKey="ps_id", OtherKey="id", IsForeignKey=true)]
+		public product_soorten product_soorten
+		{
+			get
+			{
+				return this._product_soorten.Entity;
+			}
+			set
+			{
+				product_soorten previousValue = this._product_soorten.Entity;
+				if (((previousValue != value) 
+							|| (this._product_soorten.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product_soorten.Entity = null;
+						previousValue.productens.Remove(this);
+					}
+					this._product_soorten.Entity = value;
+					if ((value != null))
+					{
+						value.productens.Add(this);
+						this._ps_id = value.id;
+					}
+					else
+					{
+						this._ps_id = default(int);
+					}
+					this.SendPropertyChanged("product_soorten");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_prijshistories(prijshistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.producten = this;
+		}
+		
+		private void detach_prijshistories(prijshistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.producten = null;
+		}
+		
+		private void attach_bestelitems(bestelitem entity)
+		{
+			this.SendPropertyChanging();
+			entity.producten = this;
+		}
+		
+		private void detach_bestelitems(bestelitem entity)
+		{
+			this.SendPropertyChanging();
+			entity.producten = null;
 		}
 	}
 }

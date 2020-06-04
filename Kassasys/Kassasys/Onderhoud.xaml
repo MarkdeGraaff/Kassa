@@ -24,6 +24,7 @@
                                                                     SelectedValuePath="id" 
                                                                     DisplayMemberPath="soort" />
                             <DataGridTextColumn Header="productnaam" Binding="{Binding naam}" />
+                            <DataGridTextColumn Header="barcode" Binding="{Binding barcode}" />                            
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="btnOpslaan_Product" Content="Opslaan" HorizontalAlignment="Left" Margin="814,14,0,0" VerticalAlignment="Top" Width="170" FontSize="24" FontWeight="Bold" Height="60" Click="BtnOpslaan_Product_Click"/>
@@ -62,7 +63,8 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}"/>
+                                        <DatePicker SelectedDate="{Binding start_datum}"/>
+                                        <!--DatePicker SelectedDate="{x:Static sys:DateTime.Now}"/-->
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -76,7 +78,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}"/>
+                                        <DatePicker SelectedDate="{Binding eind_datum}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -91,8 +93,6 @@
                     <Button x:Name="btnOpslaan_Prijzen" Content="Opslaan" HorizontalAlignment="Left" Margin="814,14,0,0" VerticalAlignment="Top" Width="170" FontSize="24" FontWeight="Bold" Height="60" Click="BtnOpslaan_Prijzen_Click"/>
                 </Grid>
             </TabItem>
-
-            <TabItem FontSize="42" Header="test" Margin="10,0,0,0"/>
 
         </TabControl>
         <DatePicker HorizontalAlignment="Left" Height="40" Margin="371,548,0,0" VerticalAlignment="Top" Width="7"/>

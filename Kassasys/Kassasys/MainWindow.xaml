@@ -5,17 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kassasys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="541.434" Width="865.711">
-    <Grid Margin="0,10,3.333,5.667">
+        Title="Kassa" Height="605.934" Width="865.711" KeyDown="Win_Main_KeyDown" ResizeMode="NoResize">
+    <Grid Margin="0,10,3,6">
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="635*"/>
+            <ColumnDefinition Width="253*"/>
+            <ColumnDefinition Width="382*"/>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="209*"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="canvas_links" Width="292" HorizontalAlignment="Left" Background="#FF1ECB18" Panel.ZIndex="1" Height="400" VerticalAlignment="Bottom" Margin="0,0,0,-1.667">
-            <DataGrid x:Name="grid_bestelitems" Height="317" Canvas.Left="10" Width="272" Canvas.Top="10" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False">
+        <Canvas x:Name="canvas_links" Width="293" HorizontalAlignment="Left" Panel.ZIndex="1" Height="398" VerticalAlignment="Bottom" Margin="0,0,0,18" Grid.ColumnSpan="2">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC5E08B" Offset="1"/>
+                    <GradientStop Color="#FF6E9912"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <DataGrid x:Name="grid_bestelitems" Height="317" Canvas.Left="10" Width="272" Canvas.Top="10" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <CollectionViewSource x:Key="prijshistories"
                           Source="{Binding prijshistories}"/>
@@ -30,17 +37,25 @@
                                                                     DisplayMemberPath="naam" />
                     <DataGridComboBoxColumn Header="Prijs"   ItemsSource="{Binding Source={StaticResource prijshistories}}" 
                                                                     SelectedValueBinding="{Binding product_id}"
-                                                                    SelectedValuePath="id" 
-                                                                    DisplayMemberPath="prijs" />
-                    
+                                                                    SelectedValuePath="product_id" 
+                                                                    DisplayMemberPath="prijs" HeaderStringFormat="" />
+
+
                     <DataGridTextColumn Header="Aantal" Binding="{Binding aantal}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Grid x:Name="Grid_Producten" Height="398" Canvas.Left="292" Width="384" Background="#FFB63838">
+            <Grid x:Name="Grid_Producten" Height="398" Canvas.Left="298" Width="405">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAB2323" Offset="0.364"/>
+                        <GradientStop Color="#FFA66363" Offset="0.632"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
                     <RowDefinition Height="80*"/>
-                    <RowDefinition Height="79*"/>
+                    <RowDefinition Height="31*"/>
+                    <RowDefinition Height="48*"/>
                     <RowDefinition Height="79*"/>
                     <RowDefinition Height="80*"/>
                 </Grid.RowDefinitions>
@@ -50,8 +65,16 @@
                     <ColumnDefinition Width="100*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
+            <Label Content="Totaal:" Canvas.Left="10" Canvas.Top="345" Height="35" Width="87" FontSize="22" FontWeight="Bold"/>
+            <Label x:Name="txtTotaal" Content="€ 0,00" Canvas.Left="102" Canvas.Top="345" FontSize="22" FontWeight="Bold" FontStyle="Italic"/>
         </Canvas>
-        <Canvas x:Name="canvas_rechts" Margin="0,4,1,0" RenderTransformOrigin="-0.253,0.51" Background="#FFAB2323" Grid.Column="2" HorizontalAlignment="Right" Width="179" VerticalAlignment="Bottom" Height="400">
+        <Canvas x:Name="canvas_rechts" Margin="0,0,1,18" RenderTransformOrigin="-0.253,0.51" Grid.Column="3" HorizontalAlignment="Right" Width="154" VerticalAlignment="Bottom" Height="398">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAB2323" Offset="0.283"/>
+                    <GradientStop Color="#FFA66363" Offset="0.62"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -60,37 +83,56 @@
                     <TranslateTransform X="0.596"/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <StackPanel x:Name="menuknoppen" Width="137" Canvas.Left="10" Canvas.Top="58" RenderTransformOrigin="-5.81,0.468" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="336">
-                <Button x:Name="but_Fris" Content="Fris" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Fris_Click" Foreground="Black">
+            <StackPanel x:Name="menuknoppen" Width="137" Canvas.Left="21" Canvas.Top="7" RenderTransformOrigin="-5.81,0.468" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="336">
+                <Button x:Name="but_Fris" Content="Fris" Height="85" FontWeight="Bold" FontSize="22" Click="But_Fris_Click" Foreground="Black" Margin="-18,0,18,0">
                     <Button.Background>
                         <ImageBrush ImageSource="https://www.leduclunchenzo.nl/wp-content/uploads/2016/07/Frisdrank1.jpg"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="but_Salade" Content="Salade" Height="85" Margin="0,0,0.333,0" Click="But_Salade_Click" FontSize="22" FontWeight="Bold">
+                <Button x:Name="but_Salade" Content="Salade" Height="85" Click="But_Salade_Click" FontSize="22" FontWeight="Bold" Margin="-18,0,18,0">
                     <Button.Background>
                         <ImageBrush ImageSource="https://static.ah.nl/static/recepten/img_RAM_PRD122202_1024x748_JPG.jpg"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="but_Snacks" Content="Snacks" Height="85" Margin="0,0,0.333,0" Click="But_Snacks_Click" FontWeight="Bold" FontSize="22">
+                <Button x:Name="but_Snacks" Content="Snacks" Height="85" Click="But_Snacks_Click" FontWeight="Bold" FontSize="22" Margin="-18,0,18,0">
                     <Button.Background>
                         <ImageBrush ImageSource="https://www.vangeloven.com/sites/vangeloven/files/2020-03/44990_laan_10093.jpg"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="but_Bieren" Content="Bieren" Height="85" Margin="0,0,0.333,0" FontWeight="Bold" FontSize="22" Click="But_Bieren_Click">
+                <Button x:Name="but_Bieren" Content="Bieren" Height="85" FontWeight="Bold" FontSize="22" Click="But_Bieren_Click" Margin="-18,0,18,0">
                     <Button.Background>
                         <ImageBrush ImageSource="https://s.s-bol.com/imgbase0/imagebase3/large/FC/0/1/5/6/9200000097646510.jpg"/>
                     </Button.Background>
                 </Button>
                 <Canvas Height="100"/>
             </StackPanel>
-            <Button x:Name="btnBestellen" Content="Bestelling opnemen" Canvas.Left="10" Canvas.Top="10" Width="137" Height="43" Click="btnBestellen_Click"/>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="95" Margin="0,-4,0,0" VerticalAlignment="Top" Width="292" Background="#FFC0B00D">
-            <Button Content="+" Canvas.Left="28" Canvas.Top="10" Width="75" Height="75" FontWeight="Bold" FontSize="48"/>
-            <Button Content="-" Canvas.Left="131" Canvas.Top="10" Width="75" Height="75" FontSize="48" FontWeight="Bold" RenderTransformOrigin="-0.802,0.358"/>
+        <Canvas HorizontalAlignment="Left" Height="133" Margin="0,-4,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF6F9A13" Offset="0.83"/>
+                    <GradientStop Color="#FF587B11" Offset="0.27"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <Button x:Name="btnPlus" Content="+" Canvas.Left="10" Canvas.Top="10" Width="57" Height="57" FontWeight="Bold" FontSize="48" Click="btnPlus_Click"/>
+            <Button x:Name="btnMin" Content="-" Canvas.Left="72" Canvas.Top="10" Width="57" Height="57" FontSize="48" FontWeight="Bold" RenderTransformOrigin="-0.802,0.358" Click="btnMin_Click"/>
         </Canvas>
-        <Canvas Grid.Column="2" HorizontalAlignment="Left" Height="81" Margin="29.667,10,0,0" VerticalAlignment="Top" Width="169">
-            <Button x:Name="butOnderhoud" Content="Onderhoud" Canvas.Left="10" Canvas.Top="10" Width="149" Height="61" FontWeight="Bold" Click="ButOnderhoud_Click"/>
+        <Canvas HorizontalAlignment="Left" Height="133" Margin="44,-3,0,0" VerticalAlignment="Top" Width="558" Grid.ColumnSpan="3" Grid.Column="1">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAB2323" Offset="0.63"/>
+                    <GradientStop Color="#FF587B11" Offset="0.437"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <Button x:Name="btnOnderhoud" Content="Onderhoud" Width="111" Height="40" FontWeight="Bold" Click="ButOnderhoud_Click" Canvas.Left="430" Canvas.Top="84"/>
+            <Button x:Name="btnBestellen" Content="Nieuwe Bestelling" Canvas.Top="84" Width="111" Height="40" Click="btnBestellen_Click" FontWeight="Bold" Canvas.Left="13"/>
+            <Button x:Name="btnAfrekenen" Content="Afrekenen" Height="40" Canvas.Left="247" Canvas.Top="84" Width="116" Click="Button_Click" FontWeight="Bold"/>
+            <Button x:Name="btnBestelling_Gereed" Content="Bestelling gereed" Height="40" Canvas.Left="127" Canvas.Top="84" Width="116" Click="btnBestelling_Gereed_Click" FontWeight="Bold"/>
+            <Label x:Name="txtBestelling" Content="Kies knop &quot;Nieuwe Bestelling&quot; om door te gaan.." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Canvas.Left="10" Canvas.Top="10" Foreground="#FFFFDEDE">
+                <Label.Effect>
+                    <DropShadowEffect/>
+                </Label.Effect>
+            </Label>
         </Canvas>
 
     </Grid>

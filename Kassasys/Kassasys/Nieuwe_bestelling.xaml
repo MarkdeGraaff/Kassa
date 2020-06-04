@@ -11,7 +11,6 @@
 
         <DataGrid x:Name="grid_klanten" HorizontalAlignment="Left" Height="298" Margin="30,31,0,0" VerticalAlignment="Top" Width="1032" FontSize="36" AutoGenerateColumns="False" Grid.ColumnSpan="3">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding id}" />
                 <DataGridTextColumn Header="Voornaam" Binding="{Binding voornaam}" />
                 <DataGridTextColumn Header="Achternaam" Binding="{Binding achternaam}" />
                 <DataGridTextColumn Header="Plaats" Binding="{Binding woonplaats}" />

@@ -11,16 +11,6 @@
       <Association Name="klanten_bestellingen" Member="bestellingens" ThisKey="id" OtherKey="klant_id" Type="bestellingen" />
     </Type>
   </Table>
-  <Table Name="dbo.producten" Member="productens">
-    <Type Name="producten">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="naam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ps_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="producten_prijshistory" Member="prijshistories" ThisKey="id" OtherKey="product_id" Type="prijshistory" />
-      <Association Name="producten_bestelitem" Member="bestelitems" ThisKey="id" OtherKey="product_id" Type="bestelitem" />
-      <Association Name="product_soorten_producten" Member="product_soorten" ThisKey="ps_id" OtherKey="id" Type="product_soorten" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.product_soorten" Member="product_soortens">
     <Type Name="product_soorten">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -55,6 +45,17 @@
       <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="bestellingen_bestelitem" Member="bestellingen" ThisKey="bestelling_id" OtherKey="id" Type="bestellingen" IsForeignKey="true" />
       <Association Name="producten_bestelitem" Member="producten" ThisKey="product_id" OtherKey="id" Type="producten" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.producten" Member="productens">
+    <Type Name="producten">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="naam" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ps_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="barcode" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Association Name="producten_prijshistory" Member="prijshistories" ThisKey="id" OtherKey="product_id" Type="prijshistory" />
+      <Association Name="producten_bestelitem" Member="bestelitems" ThisKey="id" OtherKey="product_id" Type="bestelitem" />
+      <Association Name="product_soorten_producten" Member="product_soorten" ThisKey="ps_id" OtherKey="id" Type="product_soorten" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

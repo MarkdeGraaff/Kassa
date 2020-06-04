@@ -26,17 +26,20 @@ namespace Kassasys
         DatabaseDataContext db = new DatabaseDataContext(Properties.Settings.Default.dbkassaConnectionString);
 
 
-        public int result
+        public int[] result
         {
             get
             {
+                int[] arrBestelling = { -1, -1 };
                 if (Nieuwe_Bestelling != null)
                 {
-                    return Nieuwe_Bestelling.id;
+                    arrBestelling[0] = Nieuwe_Bestelling.id;
+                    arrBestelling[1] = Nieuwe_Bestelling.klant_id;
+                    return arrBestelling;
                 }
                 else
                 {
-                    return -1;
+                    return arrBestelling;
                 }
             }
         }
@@ -49,13 +52,13 @@ namespace Kassasys
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            db.SubmitChanges();
             if (grid_klanten.SelectedItems.Count > 0)
             {
 
                 klanten klantsel = (klanten)grid_klanten.SelectedItems[0];
                 int klantid = klantsel.id;
-                //MessageBox.Show(klantid.ToString());
-                
+               
                 Nieuwe_Bestelling = new bestellingen();
                 Nieuwe_Bestelling.datum = System.DateTime.Now;
                 Nieuwe_Bestelling.klant_id = klantid;
